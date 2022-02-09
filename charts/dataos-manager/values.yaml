@@ -1,5 +1,5 @@
 name: dataos-manager
-namespace: dataos-system
+namespace: dataos-manager
 application: prime-dataos-io
 label: dataos-manager
 serviceAccountName: dataos-manager-sa
@@ -21,14 +21,16 @@ containerPorts:
     containerPort: 20220
   - name: metrics
     containerPort: 20222
+
 services:
   - name: dataos-manager
-    namespace: dataos-system
+    namespace: dataos-manager
     ports:
       - name: http
         port: 20220
       - name: metrics
         port: 20222
+
 resources:
   requests:
     cpu: 150m
