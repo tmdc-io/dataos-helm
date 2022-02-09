@@ -9,8 +9,8 @@ args:
   - --mode
   - api
 image:
-  name: docker.io/rubiklabs/dataos-manager
-  tag: 0.5.5-dev
+  name: docker.io/tmdc/dataos-manager
+  tag: latest
 
 # Include an image pull secret
 # imagePullSecrets: 

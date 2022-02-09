@@ -19,7 +19,9 @@ helm install -n dataos-manager dataos-manager dataos/dataos-manager -f dataos-ma
 ## Make sure the dataos-manager is running
 
 ```sh
-> kubectl -n dataos-manager rollout status statefulset.apps/dataos-manager
-stateful set "dataos-manager" successfully rolled out
+> kubectl -n dataos-manager rollout status statefulset/dataos-manager
+
+statefulset rolling update complete 1 pods at revision dataos-manager-REV...
+
 ```
 
