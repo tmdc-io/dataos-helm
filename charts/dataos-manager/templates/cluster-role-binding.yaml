@@ -1,0 +1,25 @@
+{{- if .Values.rbac }}
+{{- if .Values.rbac.clusterRoleBinding }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ .Values.name }}-crb
+  {{- if .Values.rbac.annotations }}
+  annotations:
+{{ toYaml .Values.rbac.annotations | indent 4 }}
+  {{- end }}
+  labels:
+    app: {{ .Values.label }}
+    app.kubernetes.io/name: {{ .Values.label }}
+    app.kubernetes.io/component: 'cluster-role-binding'
+    app.kubernetes.io/part-of: '{{ .Values.application }}'
+    {{- if .Values.rbac.labels }}
+{{ toYaml .Values.rbac.labels | indent 4 }}
+    {{- end }}
+{{ toYaml .Values.rbac.clusterRoleBinding}}
+subjects:
+- kind: ServiceAccount
+  namespace: {{ .Values.namespace }}
+  name: {{ .Values.name }}-sa
+{{- end }}
+{{- end }}

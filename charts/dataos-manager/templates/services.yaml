@@ -1,0 +1,33 @@
+{{- if .Values.services }}
+{{- $system := .Values.application -}}
+{{- $appName := .Values.name -}}
+{{- $appLabel := .Values.label -}}
+{{- range $service := .Values.services }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $service.name }}
+  namespace: {{ $service.namespace }}
+  {{- if $service.annotations }}
+  annotations:
+{{ toYaml $service.annotations | indent 4 }}
+  {{- end }}
+  labels:
+    app: {{ $appLabel }}
+    app.kubernetes.io/name: '{{ $service.name | trunc 63 | trimSuffix "-" }}'
+    app.kubernetes.io/component: 'service'
+    app.kubernetes.io/part-of: '{{ $system }}'
+    {{- if $service.labels }}
+{{ toYaml $service.labels | indent 4 }}
+    {{- end }}
+spec:
+  {{- if $service.ports }}
+  ports:
+{{ toYaml $service.ports | indent 2 }}
+  {{- end }}
+  selector:
+    app.kubernetes.io/name: {{ $appLabel }}
+    app.kubernetes.io/part-of: {{ $system }}
+{{- end }}
+{{- end }}

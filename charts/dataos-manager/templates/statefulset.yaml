@@ -1,0 +1,243 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace }}
+  annotations:
+    {{- if .Values.statefulsetAnnotations }}
+{{ toYaml .Values.statefulsetAnnotations | indent 4 }}
+    {{- end }}
+  labels:
+    app: {{ .Values.label }}
+    app.kubernetes.io/name: {{ .Values.label }}
+    app.kubernetes.io/component: 'application'
+    app.kubernetes.io/part-of: '{{ .Values.application }}'
+    {{- if .Values.statefulsetLabels }}
+{{ toYaml .Values.statefulsetLabels | indent 4 }}
+    {{- end }}
+spec:
+  replicas: 1
+  serviceName: {{ .Values.name }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  updateStrategy:
+    type: RollingUpdate
+  podManagementPolicy: Parallel
+  template:
+    metadata:
+      name: {{ .Values.name }}
+      labels:
+        app: {{ .Values.label }}
+        app.kubernetes.io/name: {{ .Values.label }}
+        app.kubernetes.io/component: 'application'
+        app.kubernetes.io/part-of: {{ .Values.application }}
+        {{- if .Values.podLabels }}
+{{ toYaml .Values.podLabels | indent 8 }}
+        {{- end }}
+      {{- if .Values.podAnnotations }}
+      annotations:
+{{ toYaml .Values.podAnnotations | indent 8 }}
+      {{- end }}
+    spec:
+      {{- with .Values.serviceAccountName }}
+      serviceAccountName: {{ . }}
+      {{- end }}
+      {{ if .Values.imagePullSecrets }}
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecrets.name }}
+      {{- end }}
+      containers:
+        - name: {{ .Values.name }}
+          image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          {{ if .Values.commands -}}
+          command: {{ .Values.commands}}
+          {{- end }}
+          {{ if .Values.args -}}
+          args:
+          {{- range $value := .Values.args }}
+            - {{$value | quote}}
+          {{- end }}
+          {{- end }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.name }}-env
+            - configMapRef:
+                name: {{ .Values.name }}-env
+          {{- if .Values.containerPorts }}
+          ports:
+{{ toYaml .Values.containerPorts | indent 10 }}
+          {{- else }}
+          ports:
+          - name: http
+            containerPort: {{ .Values.image.port }}
+            protocol: TCP
+          {{ if .Values.image.metricsPort -}}
+          - name: metrics
+            containerPort: {{ .Values.image.metricsPort }}
+            protocol: TCP
+          {{- end }}
+          {{- end }}
+          {{- if .Values.securityContext }}
+          securityContext:
+{{ toYaml .Values.securityContext | indent 12 }}
+          {{- else}}
+          securityContext:
+            privileged: false
+          {{- end }}
+          {{- range $conf, $value := .Values.containerFields }}
+          {{$conf}}: {{$value}}
+          {{- end }}
+          {{- if .Values.resources }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+          {{- end }}
+          {{- if .Values.volumeMounts }}
+          volumeMounts:
+{{ toYaml .Values.volumeMounts | indent 10 }}
+          {{- end }}
+          {{- if .Values.workingDir }}
+          workingDir: {{ .Values.workingDir | quote }}
+          {{- end }}
+      {{ if .Values.sideCars -}}
+      {{- range $sideCar := .Values.sideCars }}
+        - name: {{ $sideCar.name }}
+          image: "{{ $sideCar.image.name }}:{{ $sideCar.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          {{ if $sideCar.commands -}}
+          command: {{ $sideCar.commands}}
+          {{- end }}
+          {{ if $sideCar.args -}}
+          args:
+          {{- range $value := $sideCar.args }}
+            - {{$value | quote}}
+          {{- end }}
+          {{- end }}
+          {{ if $sideCar.environment -}}
+          env:
+          {{- range $conf, $value := $sideCar.environment }}
+            - name: {{ $conf | quote }}
+              value: {{ $value | quote }}
+          {{- end }}
+          {{- end }}
+          {{ if $sideCar.secretEnvironment -}}
+          envFrom:
+            - secretRef:
+                name: {{ $sideCar.name }}-env
+          {{- end }}
+          {{- if $sideCar.containerPorts }}
+          ports:
+{{ toYaml $sideCar.containerPorts | indent 10 }}
+          {{- else }}
+          ports:
+          - name: http
+            containerPort: {{ $sideCar.image.port }}
+            protocol: TCP
+          {{ if $sideCar.image.metricsPort -}}
+          - name: metrics
+            containerPort: {{ $sideCar.image.metricsPort }}
+            protocol: TCP
+          {{- end }}
+          {{- end }}
+          {{- if $sideCar.securityContext }}
+          securityContext:
+{{ toYaml $sideCar.securityContext | indent 12 }}
+          {{- else}}
+          securityContext:
+            privileged: false
+          {{- end }}
+          {{- range $conf, $value := $sideCar.containerFields }}
+          {{$conf}}: {{$value}}
+          {{- end }}
+          {{- if $sideCar.resources }}
+          resources:
+{{ toYaml $sideCar.resources | indent 12 }}
+          {{- end }}
+          {{- if $sideCar.volumeMounts }}
+          volumeMounts:
+{{ toYaml $sideCar.volumeMounts | indent 10 }}
+          {{- end }}
+          {{- if $sideCar.workingDir }}
+          workingDir: {{ $sideCar.workingDir | quote }}
+          {{- end }}
+      {{- end }}
+      {{- end }}
+      {{ if .Values.initContainers -}}
+      initContainers:
+      {{- range $initContainer := .Values.initContainers }}
+        - name: {{ $initContainer.name }}
+          image: "{{ $initContainer.image.name }}:{{ $initContainer.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          {{ if $initContainer.commands -}}
+          command: {{ $initContainer.commands}}
+          {{- end }}
+          {{ if $initContainer.args -}}
+          args:
+          {{- range $value := $initContainer.args }}
+            - {{$value | quote}}
+          {{- end }}
+          {{- end }}
+          {{ if $initContainer.environment -}}
+          env:
+          {{- range $conf, $value := $initContainer.environment }}
+            - name: {{ $conf | quote }}
+              value: {{ $value | quote }}
+          {{- end }}
+          {{- end }}
+          {{ if $initContainer.secretEnvironment -}}
+          envFrom:
+            - secretRef:
+                name: {{ $initContainer.name }}-env
+          {{- end }}
+          {{- if $initContainer.containerPorts }}
+          ports:
+{{ toYaml $initContainer.containerPorts | indent 10 }}
+          {{- else }}
+          ports:
+          - name: http
+            containerPort: {{ $initContainer.image.port }}
+            protocol: TCP
+          {{ if $initContainer.image.metricsPort -}}
+          - name: metrics
+            containerPort: {{ $initContainer.image.metricsPort }}
+            protocol: TCP
+          {{- end }}
+          {{- end }}
+          {{- if $initContainer.securityContext }}
+          securityContext:
+{{ toYaml $initContainer.securityContext | indent 12 }}
+          {{- else}}
+          securityContext:
+            privileged: false
+          {{- end }}
+          {{- range $conf, $value := $initContainer.containerFields }}
+          {{$conf}}: {{$value}}
+          {{- end }}
+          {{- if $initContainer.resources }}
+          resources:
+{{ toYaml $initContainer.resources | indent 12 }}
+          {{- end }}
+          {{- if $initContainer.volumeMounts }}
+          volumeMounts:
+{{ toYaml $initContainer.volumeMounts | indent 10 }}
+          {{- end }}
+          {{- if $initContainer.workingDir }}
+          workingDir: {{ $initContainer.workingDir | quote }}
+          {{- end }}
+      {{- end }}
+      {{- end }}
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+      {{- end }}
+      {{- if .Values.tolerations }}
+      tolerations:
+{{ toYaml .Values.tolerations | indent 8 }}
+      {{- end }}
+      {{- if .Values.volumes }}
+      volumes:
+{{ toYaml .Values.volumes | indent 8 }}
+      {{- end }}

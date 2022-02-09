@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Values.name }}-env
+  labels:
+    app: {{ .Values.label }}
+    app.kubernetes.io/name: '{{ .Values.label }}'
+    app.kubernetes.io/component: 'configuration'
+    app.kubernetes.io/part-of: '{{ .Values.application }}'
+data:
+  LOG_LEVEL: {{ .Values.logLevel | quote  }}
+
+  META_PRODUCT_NAME: {{ .Values.metaProductName | quote  }}
+  META_MY_NAME: {{ .Values.metaMyName | quote  }}
+
+  HTTP_PORT: {{ .Values.httpPort | quote  }}
+  HTTP_SCHEME: {{ .Values.httpScheme | quote  }}
+  TLS_CRT_FILE: {{ .Values.tlsCrtFile | quote  }}
+  TLS_KEY_FILE: {{ .Values.tlsKeyFile | quote  }}
+  BASE_URI_PATH: {{ .Values.baseUriPath | quote  }}
+  METRIC_PORT: {{ .Values.metricPort | quote  }}
+  GIN_MODE: {{ .Values.ginMode | quote  }}
+
+  HOME_DIR: {{ .Values.homeDir | quote  }}
+  OPERATE_SUB_DIR: {{ .Values.operateSubDir | quote  }}
+  HELM_FETCH_SUB_DIR: {{ .Values.helmFetchSubDir | quote  }}
+  TEMPLATE_SUB_DIR: {{ .Values.templateSubDir | quote  }}
+  RENDER_SUB_DIR: {{ .Values.renderSubDir | quote  }}
+  DEFAULT_CHART_REPO: {{ .Values.defaultChartRepo | quote  }}
+  HELM_EXPERIMENTAL_OCI: "1"
+
+  LICENSE_KEY: {{ .Values.licenseKey | quote  }}
+  ORGANIZATION_NAME: {{ .Values.organizationName | quote  }}
+  ORGANIZATION_ID: {{ .Values.organizationId | quote  }}
+  
+  HELM_BINARY: {{ .Values.helmBinary | quote  }}
+
+  DATAOS_CTL_IMAGE: {{ .Values.dataosCtlImage | quote  }}
+  DATAOS_CTL_IMAGE_PULL_SECRET: {{ .Values.dataosCtlImagePullSecret | quote  }}
+
+  PLUTUS_URL: {{ .Values.plutusUrl | quote  }}
+
+  GIT_SUB_DIR: {{ .Values.gitSubDir | quote  }}
+  GIT_T_MINUS_1_DIR: {{ .Values.gitTMinus1Dir | quote  }}
+  GIT_SUB_SUB_DIR: {{ .Values.gitSubSubDir | quote  }}
+  GIT_ZIP_FILE_NAME: {{ .Values.gitZipFileName | quote  }}
+
+  GITOPS_INSTALL_MANIFEST_FILE_NAME: {{ .Values.gitopsInstallManifestFileName | quote  }}
+  GITOPS_PROVIDER_TYPE: {{ .Values.gitopsProviderType | quote  }}
+  GITOPS_TEMP_DIR: {{ .Values.gitopsTempDir | quote  }}
+
+{{- if eq .Values.gitopsProviderType "s3" }}
+  {{ if .Values.gitopsS3Endpoint -}}
+  GITOPS_S3_ENDPOINT: {{ .Values.gitopsS3Endpoint | quote  }}
+  {{- end }}
+  GITOPS_S3_REGION: {{ .Values.gitopsS3Region | quote  }}
+  GITOPS_S3_BUCKET: {{ .Values.gitopsS3Bucket | quote  }}
+{{- end }}
+{{- if eq .Values.gitopsProviderType "azurefile" }}
+  GITOPS_AZURE_FILE_FILE_URL_TEMPLATE: {{ .Values.gitopsAzureFileFileUrlTemplate | quote  }}
+  GITOPS_AZURE_FILE_DIRECTORY_URL_TEMPLATE: {{ .Values.gitopsAzureFileDirectoryUrlTemplate | quote  }}
+  GITOPS_AZURE_FILE_STORAGE_ACCOUNT_NAME: {{ .Values.gitopsAzureFileStorageAccountName | quote  }}
+  GITOPS_AZURE_FILE_SHARE_NAME: {{ .Values.gitopsAzureFileShareName | quote  }}
+{{- end }}
+
+{{- if .Values.redisUrl }}
+  REDIS_URL: {{ .Values.redisUrl | quote  }}
+  REDIS_DB_ID: {{ .Values.redisDbId | quote  }}
+  REDIS_USE_TLS: {{ .Values.redisUseTls | quote  }}
+{{- end }}

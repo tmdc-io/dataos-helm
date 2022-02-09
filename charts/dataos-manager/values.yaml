@@ -1,0 +1,117 @@
+name: dataos-manager
+namespace: dataos-system
+application: prime-dataos-io
+label: dataos-manager
+serviceAccountName: dataos-manager-sa
+commands: ["/opt/dataos/dataos-manager"]
+args:
+  - server
+  - --mode
+  - api
+image:
+  name: docker.io/rubiklabs/dataos-manager
+  tag: 0.5.5-dev
+
+# Include an image pull secret
+# imagePullSecrets: 
+#   name: dataos-manager-pull-secret
+
+containerPorts:
+  - name: http
+    containerPort: 20220
+  - name: metrics
+    containerPort: 20222
+services:
+  - name: dataos-manager
+    namespace: dataos-system
+    ports:
+      - name: http
+        port: 20220
+      - name: metrics
+        port: 20222
+resources:
+  requests:
+    cpu: 150m
+    memory: 400Mi
+rbac:
+  serviceAccount: true
+  clusterRoleBinding:
+    roleRef:
+      kind: ClusterRole
+      apiGroup: rbac.authorization.k8s.io
+      name: cluster-admin
+
+# Include an image pull secret
+# imagePullSecret:
+#   name: dataos-manager-pull-secret
+#   type: kubernetes.io/dockerconfigjson
+
+logLevel: info
+metaProductName: dataos
+metaMyName: dataos-manager
+
+httpPort: 20220
+httpScheme: http
+tlsCrtFile: /etc/dataos/certs/tls.crt
+tlsKeyFile: /etc/dataos/certs/tls.key
+baseUriPath: /manager
+metricPort: 20222
+ginMode: release
+
+homeDir: /opt/dataos/home
+operateSubDir: operate
+helmFetchSubDir: charts
+templateSubDir: deploy
+renderSubDir: rendered
+defaultChartRepo: dataos-base
+
+licenseKey: 
+organizationName: 
+organizationId: 
+
+helmBinary: /usr/local/bin/helm
+
+dataosCtlImage: docker.io/rubiklabs/dataos-ctl:1.2.19
+dataosCtlImagePullSecret: dataos-container-registry
+
+plutusUrl: https://prime.dataos.io/plutus/api/v1
+primeApiKey: 
+primeCloudUserName: 
+primeCloudPassword: 
+
+gitSubDir: git
+gitTMinus1Dir: git-t-1
+gitSubSubDir: git
+gitZipFileName: gitops.zip
+
+gitopsInstallManifestFileName: dataos.release.yaml
+# GitOps Providers: s3 | azurefile
+gitopsProviderType: s3
+gitopsTempDir: /opt/dataos/home/tmp
+
+# GitOps Providers s3 
+# GCP S3 Endpoint
+# gitopsS3Endpoint: storage.googleapis.com
+gitopsS3Region: 
+gitopsS3Bucket: 
+gitopsS3AccessKey:
+gitopsS3SecretKey: 
+
+# GitOps Providers azurefile
+gitopsAzureFileFileUrlTemplate: https://%s.file.core.windows.net/%s/%s
+gitopsAzureFileDirectoryUrlTemplate: https://%s.file.core.windows.net/%s
+# gitopsAzureFileStorageAccountName: 
+# gitopsAzureFileShareName: 
+# gitopsAzureFileAccessKey: 
+
+# Use to Enable Redis Cache for GitOps
+# redisUrl: redis-cache-master.caretaker.svc.cluster.local:6379
+# redisDbId: 8
+# redisUseTls: false
+  
+# Use to Enable a Service Monitor
+# serviceMonitor:
+#   endpoints:
+#   - targetPort: metrics
+#     interval: 30s
+#     scrapeTimeout: 30s
