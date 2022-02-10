@@ -7,7 +7,7 @@ commands: ["/opt/dataos/dataos-manager"]
 args:
   - server
   - --mode
-  - api
+  - pull
 image:
   name: docker.io/tmdc/dataos-manager
   tag: latest
@@ -15,6 +15,20 @@ image:
 # Include an image pull secret
 # imagePullSecrets: 
 #   name: dataos-manager-pull-secret
+
+# Include an image pull secret
+# imagePullSecret:
+#   name: dataos-manager-pull-secret
+#   type: kubernetes.io/dockerconfigjson
+
+# Include install files as a Volume from a ConfigMap or Secret
+# volumes:
+#   - name: install-files
+#     configMap:
+#       name: dataos-install-files
+# volumeMounts:
+#   - name: install-files
+#     mountPath: "/etc/dataos/install"
 
 containerPorts:
   - name: http
@@ -43,11 +57,6 @@ rbac:
       apiGroup: rbac.authorization.k8s.io
       name: cluster-admin
 
-# Include an image pull secret
-# imagePullSecret:
-#   name: dataos-manager-pull-secret
-#   type: kubernetes.io/dockerconfigjson
-
 logLevel: info
 metaProductName: dataos
 metaMyName: dataos-manager
@@ -68,8 +77,6 @@ renderSubDir: rendered
 defaultChartRepo: dataos-base
 
 licenseKey: 
-organizationName: 
-organizationId: 
 
 helmBinary: /usr/local/bin/helm
 
@@ -108,8 +115,8 @@ gitopsAzureFileDirectoryUrlTemplate: https://%s.file.core.windows.net/%s
 
 # Use to Enable Redis Cache for GitOps
 # redisUrl: redis-cache-master.caretaker.svc.cluster.local:6379
-# redisDbId: 8
-# redisUseTls: false
+redisDbId: 8
+redisUseTls: false
   
 # Use to Enable a Service Monitor
 # serviceMonitor:

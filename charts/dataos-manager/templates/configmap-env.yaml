@@ -31,8 +31,6 @@ data:
   HELM_EXPERIMENTAL_OCI: "1"
 
   LICENSE_KEY: {{ .Values.licenseKey | quote  }}
-  ORGANIZATION_NAME: {{ .Values.organizationName | quote  }}
-  ORGANIZATION_ID: {{ .Values.organizationId | quote  }}
   
   HELM_BINARY: {{ .Values.helmBinary | quote  }}
 
