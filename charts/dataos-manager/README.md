@@ -35,6 +35,7 @@ You will need to create a values.yaml file to configure the dataos-manager appli
 helm repo add dataos https://tmdc-io.github.io/dataos-helm
 helm repo update
 kubectl create ns dataos-manager
+kubectl label ns dataos-manager dataos.io/partOf=dataos
 helm install -n dataos-manager dataos-manager dataos/dataos-manager -f dataos-manager-values.yaml
 ```
 
