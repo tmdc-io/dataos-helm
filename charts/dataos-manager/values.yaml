@@ -1,13 +1,14 @@
+# The instanceName should be the fully qualified name of the DataOS Instance like "demo-test-01.dataos.io"
+instanceName: 
+# The mode can be api | prime
+mode: prime
+
 name: dataos-manager
 namespace: dataos-manager
 application: prime-dataos-io
 label: dataos-manager
 serviceAccountName: dataos-manager-sa
-commands: ["/opt/dataos/dataos-manager"]
-args:
-  - server
-  - --mode
-  - pull
+
 image:
   name: docker.io/tmdc/dataos-manager
   tag: latest

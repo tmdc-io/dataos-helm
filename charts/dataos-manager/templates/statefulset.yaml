@@ -3,10 +3,10 @@ kind: StatefulSet
 metadata:
   name: {{ .Values.name }}
   namespace: {{ .Values.namespace }}
+  {{- if .Values.statefulsetAnnotations }}
   annotations:
-    {{- if .Values.statefulsetAnnotations }}
 {{ toYaml .Values.statefulsetAnnotations | indent 4 }}
-    {{- end }}
+  {{- end }}
   labels:
     app: {{ .Values.label }}
     app.kubernetes.io/name: {{ .Values.label }}
@@ -51,15 +51,13 @@ spec:
         - name: {{ .Values.name }}
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
-          {{ if .Values.commands -}}
-          command: {{ .Values.commands}}
-          {{- end }}
-          {{ if .Values.args -}}
+          command: ["/opt/dataos/dataos-manager"]
           args:
-          {{- range $value := .Values.args }}
-            - {{$value | quote}}
-          {{- end }}
-          {{- end }}
+            - server
+            - --mode
+            - {{ .Values.mode | quote }}
+            - --instance-name
+            - {{ .Values.instanceName | quote }}
           envFrom:
             - secretRef:
                 name: {{ .Values.name }}-env
