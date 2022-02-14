@@ -3,6 +3,15 @@ entries:
   dataos-manager:
   - apiVersion: v2
     appVersion: 0.6.1
+    created: "2022-02-14T19:25:01.510679928Z"
+    description: The DataOS® Manager Chart
+    digest: 8846f3402a481b29a38711587ffaa1924b25b68b76e1791d1dfc5b20e2e5ad7a
+    name: dataos-manager
+    urls:
+    - https://github.com/tmdc-io/dataos-helm/releases/download/dataos-manager-1.0.4/dataos-manager-1.0.4.tgz
+    version: 1.0.4
+  - apiVersion: v2
+    appVersion: 0.6.1
     created: "2022-02-14T18:51:34.297739974Z"
     description: The DataOS® Manager Chart
     digest: 77fdbd783faba04a6c6e37034f8c041659f38204f28869f035e8abf9f459e063
@@ -10,4 +19,4 @@ entries:
     urls:
     - https://github.com/tmdc-io/dataos-helm/releases/download/dataos-manager-1.0.3/dataos-manager-1.0.3.tgz
     version: 1.0.3
-generated: "2022-02-14T18:51:34.297746474Z"
+generated: "2022-02-14T19:25:01.510687028Z"
