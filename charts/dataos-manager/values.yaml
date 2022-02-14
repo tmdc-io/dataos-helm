@@ -88,6 +88,10 @@ plutusUrl: https://prime.dataos.io/plutus/api/v1
 primeApiKey: 
 primeCloudUserName: 
 primeCloudPassword: 
+enablePrimeSyncUp: true
+enablePrimeSyncExecute: true
+primeSyncIntervalUp: 10m
+primeSyncIntervalExecute: 5m
 
 gitSubDir: git
 gitTMinus1Dir: git-t-1

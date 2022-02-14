@@ -38,6 +38,10 @@ data:
   DATAOS_CTL_IMAGE_PULL_SECRET: {{ .Values.dataosCtlImagePullSecret | quote  }}
 
   PLUTUS_URL: {{ .Values.plutusUrl | quote  }}
+  ENABLE_PRIME_SYNC_UP: {{ .Values.enablePrimeSyncUp | quote  }}
+  ENABLE_PRIME_SYNC_EXECUTE: {{ .Values.enablePrimeSyncExecute | quote  }}
+  PRIME_SYNC_INTERVAL_UP: {{ .Values.primeSyncIntervalUp | quote  }}
+  PRIME_SYNC_INTERVAL_EXECUTE: {{ .Values.primeSyncIntervalExecute | quote  }}
 
   GIT_SUB_DIR: {{ .Values.gitSubDir | quote  }}
   GIT_T_MINUS_1_DIR: {{ .Values.gitTMinus1Dir | quote  }}
