@@ -16,6 +16,9 @@ You will need to create a values.yaml file to configure the dataos-manager appli
 | primeApiKey | string | `""` | DataOS Prime API Key |
 | primeCloudUserName | string | `""` | DataOS Prime Cloud Username |
 | primeCloudPassword | string | `""` | DataOS Prime Cloud Password |
+| instanceName | string | `""` | Fully Qualified Instance name `(ex. smiley-mouse.dataos.io)` |
+| primeSyncIntervalUp | string | `"10m"` | Interval to Heartbeat Prime |
+| primeSyncIntervalExecute | string | `"5m"` | Interval to Retrieve Execute Requests |
 | gitopsProviderType | string | `"s3"` | GitOps Provider Type s3 or azurefile |
 | gitopsS3Endpoint | string | `""` | GitOps S3 Endpoint blank for AWS, use storage.googleapis.com for GCP |
 | gitopsS3Region | string | `""` | GitOps S3 Region |
