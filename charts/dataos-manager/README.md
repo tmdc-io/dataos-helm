@@ -25,6 +25,7 @@ You will need to create a values.yaml file to configure the dataos-manager appli
 | gitopsS3Bucket | string | `""` | GitOps S3 Bucket |
 | gitopsS3AccessKey | string | `""` | GitOps S3 Access Key |
 | gitopsS3SecretKey | string | `""` | GitOps S3 Secret Key |
+| gitopsS3RootDir | string | `""` | GitOps S3 Root Directory in Bucket |
 | gitopsAzureFileFileUrlTemplate | string | `"https://%s.file.core.windows.net/%s/%s"` | GitOps Azure File Url Template |
 | gitopsAzureFileDirectoryUrlTemplate | string | `"https://%s.file.core.windows.net/%s"` | GitOps Azure File Url Template |
 | gitopsAzureFileStorageAccountName | string | `""` | GitOps Azure File Storage Account Name |

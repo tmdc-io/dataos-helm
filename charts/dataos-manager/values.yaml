@@ -13,6 +13,8 @@ image:
   name: docker.io/tmdc/dataos-manager
   tag: latest
 
+replicas: 2
+
 # Include an image pull secret
 # imagePullSecrets: 
 #   name: dataos-manager-pull-secret
@@ -81,7 +83,7 @@ licenseKey:
 
 helmBinary: /usr/local/bin/helm
 
-dataosCtlImage: docker.io/rubiklabs/dataos-ctl:1.2.19
+dataosCtlImage: 933570616564.dkr.ecr.us-west-2.amazonaws.com/released-images/dataos-ctl:1.2.23
 dataosCtlImagePullSecret: dataos-container-registry
 
 plutusUrl: https://prime.dataos.io/plutus/api/v1
@@ -110,6 +112,7 @@ gitopsS3Region:
 gitopsS3Bucket: 
 gitopsS3AccessKey:
 gitopsS3SecretKey: 
+gitopsS3RootDir: 
 
 # GitOps Providers azurefile
 gitopsAzureFileFileUrlTemplate: https://%s.file.core.windows.net/%s/%s

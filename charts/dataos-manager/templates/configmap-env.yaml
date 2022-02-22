@@ -14,6 +14,8 @@ data:
   META_PRODUCT_NAME: {{ .Values.metaProductName | quote  }}
   META_MY_NAME: {{ .Values.metaMyName | quote  }}
 
+  LEADER_ELECTION_LEASE_NAMESPACE: {{ .Values.namespace | quote }}
+
   HTTP_PORT: {{ .Values.httpPort | quote  }}
   HTTP_SCHEME: {{ .Values.httpScheme | quote  }}
   TLS_CRT_FILE: {{ .Values.tlsCrtFile | quote  }}
@@ -58,6 +60,7 @@ data:
   {{- end }}
   GITOPS_S3_REGION: {{ .Values.gitopsS3Region | quote  }}
   GITOPS_S3_BUCKET: {{ .Values.gitopsS3Bucket | quote  }}
+  GITOPS_S3_ROOT_DIR: {{ .Values.gitopsS3RootDir | quote }}
 {{- end }}
 {{- if eq .Values.gitopsProviderType "azurefile" }}
   GITOPS_AZURE_FILE_FILE_URL_TEMPLATE: {{ .Values.gitopsAzureFileFileUrlTemplate | quote  }}
