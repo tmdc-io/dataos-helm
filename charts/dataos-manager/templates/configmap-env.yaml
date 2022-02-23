@@ -35,6 +35,7 @@ data:
   LICENSE_KEY: {{ .Values.licenseKey | quote  }}
   
   HELM_BINARY: {{ .Values.helmBinary | quote  }}
+  SOPS_BINARY: {{ .Values.sopsBinary | quote  }}
 
   DATAOS_CTL_IMAGE: {{ .Values.dataosCtlImage | quote  }}
   DATAOS_CTL_IMAGE_PULL_SECRET: {{ .Values.dataosCtlImagePullSecret | quote  }}
