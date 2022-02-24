@@ -83,9 +83,7 @@ licenseKey:
 
 helmBinary: /usr/local/bin/helm
 sopsBinary: /usr/local/bin/sops
-
-dataosCtlImage: 933570616564.dkr.ecr.us-west-2.amazonaws.com/released-images/dataos-ctl:1.2.23
-dataosCtlImagePullSecret: dataos-container-registry
+dataosCtlBinary: /usr/local/bin/dataos-ctl
 
 plutusUrl: https://prime.dataos.io/plutus/api/v1
 primeApiKey: 

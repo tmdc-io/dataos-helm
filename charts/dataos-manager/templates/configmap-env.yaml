@@ -36,9 +36,7 @@ data:
   
   HELM_BINARY: {{ .Values.helmBinary | quote  }}
   SOPS_BINARY: {{ .Values.sopsBinary | quote  }}
-
-  DATAOS_CTL_IMAGE: {{ .Values.dataosCtlImage | quote  }}
-  DATAOS_CTL_IMAGE_PULL_SECRET: {{ .Values.dataosCtlImagePullSecret | quote  }}
+  DATAOS_CTL_BINARY: {{ .Values.dataosCtlBinary | quote  }}
 
   PLUTUS_URL: {{ .Values.plutusUrl | quote  }}
   ENABLE_PRIME_SYNC_UP: {{ .Values.enablePrimeSyncUp | quote  }}
