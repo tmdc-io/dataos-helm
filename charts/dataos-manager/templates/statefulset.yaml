@@ -63,6 +63,11 @@ spec:
                 name: {{ .Values.name }}-env
             - configMapRef:
                 name: {{ .Values.name }}-env
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
           {{- if .Values.containerPorts }}
           ports:
 {{ toYaml .Values.containerPorts | indent 10 }}
