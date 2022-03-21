@@ -31,8 +31,6 @@ data:
   RENDER_SUB_DIR: {{ .Values.renderSubDir | quote  }}
   DEFAULT_CHART_REPO: {{ .Values.defaultChartRepo | quote  }}
   HELM_EXPERIMENTAL_OCI: "1"
-
-  LICENSE_KEY: {{ .Values.licenseKey | quote  }}
   
   HELM_BINARY: {{ .Values.helmBinary | quote  }}
   SOPS_BINARY: {{ .Values.sopsBinary | quote  }}
