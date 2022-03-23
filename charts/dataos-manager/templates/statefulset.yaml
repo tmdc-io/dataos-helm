@@ -96,7 +96,12 @@ spec:
           resources:
 {{ toYaml .Values.resources | indent 12 }}
           {{- end }}
-          {{- if .Values.volumeMounts }}
+          {{ if .Values.cloudKernelJson -}}
+          volumeMounts:
+          - name: cloud-kernel-json
+            mountPath: "/etc/cloudkernel"
+            readOnly: true
+          {{- else if .Values.volumeMounts }}
           volumeMounts:
 {{ toYaml .Values.volumeMounts | indent 10 }}
           {{- end }}
@@ -240,7 +245,12 @@ spec:
       tolerations:
 {{ toYaml .Values.tolerations | indent 8 }}
       {{- end }}
-      {{- if .Values.volumes }}
+      {{ if .Values.cloudKernelJson -}}
+      volumes:
+        - name: cloud-kernel-json
+          secret:
+            secretName: cloud-kernel-json
+      {{- else if .Values.volumes }}
       volumes:
 {{ toYaml .Values.volumes | indent 8 }}
       {{- end }}

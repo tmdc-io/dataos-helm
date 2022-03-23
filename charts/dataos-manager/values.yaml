@@ -33,6 +33,8 @@ replicas: 2
 #   - name: install-files
 #     mountPath: "/etc/dataos/install"
 
+# cloudKernelJson: 
+
 containerPorts:
   - name: http
     containerPort: 20220
