@@ -91,10 +91,16 @@ plutusUrl: https://prime.dataos.io/plutus/api/v1
 primeApiKey: 
 primeCloudUserName: 
 primeCloudPassword: 
+helmPrimeCloudUserName: 
+helmPrimeCloudPassword: 
 enablePrimeSyncUp: true
 enablePrimeSyncExecute: true
 primeSyncIntervalUp: 10m
 primeSyncIntervalExecute: 5m
+imageRepositoryType: ecr
+imageRepositoryAccessConfigUsername: 
+imageRepositoryAccessConfigPassword: 
+imageRepositorySecretName: container_registry_user_pass
 
 gitSubDir: git
 gitTMinus1Dir: git-t-1
