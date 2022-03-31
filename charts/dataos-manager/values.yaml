@@ -11,7 +11,7 @@ serviceAccountName: dataos-manager-sa
 
 image:
   name: docker.io/tmdc/dataos-manager
-  tag: 0.7.28
+  tag: 0.8.0
 
 replicas: 2
 
