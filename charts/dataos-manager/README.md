@@ -12,10 +12,8 @@ You will need to create a values.yaml file to configure the dataos-manager appli
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| licenseKey | string | `""` | DataOS Software License Key |
+| primeAccountId | string | `""` | DataOS Account ID |
 | primeApiKey | string | `""` | DataOS Prime API Key |
-| primeCloudUserName | string | `""` | DataOS Prime Cloud Username |
-| primeCloudPassword | string | `""` | DataOS Prime Cloud Password |
 | instanceName | string | `""` | Fully Qualified Instance name `(ex. smiley-mouse.dataos.io)` |
 | primeSyncIntervalUp | string | `"10m"` | Interval to Heartbeat Prime |
 | primeSyncIntervalExecute | string | `"5m"` | Interval to Retrieve Execute Requests |

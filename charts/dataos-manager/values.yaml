@@ -11,7 +11,7 @@ serviceAccountName: dataos-manager-sa
 
 image:
   name: docker.io/tmdc/dataos-manager
-  tag: 0.8.0
+  tag: 0.9.0
 
 replicas: 2
 
@@ -33,6 +33,7 @@ replicas: 2
 #   - name: install-files
 #     mountPath: "/etc/dataos/install"
 
+# Include the cloud kernel json
 # cloudKernelJson: 
 
 containerPorts:
@@ -81,26 +82,17 @@ templateSubDir: deploy
 renderSubDir: rendered
 defaultChartRepo: dataos-base
 
-licenseKey: 
-
 helmBinary: /usr/local/bin/helm
 sopsBinary: /usr/local/bin/sops
 dataosCtlBinary: /usr/local/bin/dataos-ctl
 
-plutusUrl: https://prime.dataos.io/plutus/api/v1
+plutusUrl: https://prime.tmdata.io/plutus/api/v1
 primeApiKey: 
-primeCloudUserName: 
-primeCloudPassword: 
-helmPrimeCloudUserName: 
-helmPrimeCloudPassword: 
+primeAccountId: 
 enablePrimeSyncUp: true
 enablePrimeSyncExecute: true
 primeSyncIntervalUp: 10m
 primeSyncIntervalExecute: 5m
-imageRepositoryType: ecr
-imageRepositoryAccessConfigUsername: 
-imageRepositoryAccessConfigPassword: 
-imageRepositorySecretName: container_registry_user_pass
 
 gitSubDir: git
 gitTMinus1Dir: git-t-1
