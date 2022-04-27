@@ -46,25 +46,8 @@ data:
   GIT_T_MINUS_1_DIR: {{ .Values.gitTMinus1Dir | quote  }}
   GIT_SUB_SUB_DIR: {{ .Values.gitSubSubDir | quote  }}
   GIT_ZIP_FILE_NAME: {{ .Values.gitZipFileName | quote  }}
-
   GITOPS_INSTALL_MANIFEST_FILE_NAME: {{ .Values.gitopsInstallManifestFileName | quote  }}
-  GITOPS_PROVIDER_TYPE: {{ .Values.gitopsProviderType | quote  }}
   GITOPS_TEMP_DIR: {{ .Values.gitopsTempDir | quote  }}
-
-{{- if eq .Values.gitopsProviderType "s3" }}
-  {{ if .Values.gitopsS3Endpoint -}}
-  GITOPS_S3_ENDPOINT: {{ .Values.gitopsS3Endpoint | quote  }}
-  {{- end }}
-  GITOPS_S3_REGION: {{ .Values.gitopsS3Region | quote  }}
-  GITOPS_S3_BUCKET: {{ .Values.gitopsS3Bucket | quote  }}
-  GITOPS_S3_ROOT_DIR: {{ .Values.gitopsS3RootDir | quote }}
-{{- end }}
-{{- if eq .Values.gitopsProviderType "azurefile" }}
-  GITOPS_AZURE_FILE_FILE_URL_TEMPLATE: {{ .Values.gitopsAzureFileFileUrlTemplate | quote  }}
-  GITOPS_AZURE_FILE_DIRECTORY_URL_TEMPLATE: {{ .Values.gitopsAzureFileDirectoryUrlTemplate | quote  }}
-  GITOPS_AZURE_FILE_STORAGE_ACCOUNT_NAME: {{ .Values.gitopsAzureFileStorageAccountName | quote  }}
-  GITOPS_AZURE_FILE_SHARE_NAME: {{ .Values.gitopsAzureFileShareName | quote  }}
-{{- end }}
 
 {{- if .Values.redisUrl }}
   REDIS_URL: {{ .Values.redisUrl | quote  }}

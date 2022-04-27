@@ -11,7 +11,7 @@ serviceAccountName: dataos-manager-sa
 
 image:
   name: docker.io/tmdc/dataos-manager
-  tag: 0.9.0
+  tag: 0.9.2
 
 replicas: 2
 
@@ -98,27 +98,9 @@ gitSubDir: git
 gitTMinus1Dir: git-t-1
 gitSubSubDir: git
 gitZipFileName: gitops.zip
-
 gitopsInstallManifestFileName: dataos.release.yaml
-# GitOps Providers: s3 | azurefile
-gitopsProviderType: s3
 gitopsTempDir: /opt/dataos/home/tmp
 
-# GitOps Providers s3 
-# GCP S3 Endpoint
-# gitopsS3Endpoint: storage.googleapis.com
-gitopsS3Region: 
-gitopsS3Bucket: 
-gitopsS3AccessKey:
-gitopsS3SecretKey: 
-gitopsS3RootDir: 
-
-# GitOps Providers azurefile
-gitopsAzureFileFileUrlTemplate: https://%s.file.core.windows.net/%s/%s
-gitopsAzureFileDirectoryUrlTemplate: https://%s.file.core.windows.net/%s
-# gitopsAzureFileStorageAccountName: 
-# gitopsAzureFileShareName: 
-# gitopsAzureFileAccessKey: 
 
 # Use to Enable Redis Cache for GitOps
 redisUrl: redis-cache-master.caretaker.svc.cluster.local:6379

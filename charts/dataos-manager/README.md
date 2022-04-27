@@ -17,18 +17,6 @@ You will need to create a values.yaml file to configure the dataos-manager appli
 | instanceName | string | `""` | Fully Qualified Instance name `(ex. smiley-mouse.dataos.io)` |
 | primeSyncIntervalUp | string | `"10m"` | Interval to Heartbeat Prime |
 | primeSyncIntervalExecute | string | `"5m"` | Interval to Retrieve Execute Requests |
-| gitopsProviderType | string | `"s3"` | GitOps Provider Type s3 or azurefile |
-| gitopsS3Endpoint | string | `""` | GitOps S3 Endpoint blank for AWS, use storage.googleapis.com for GCP |
-| gitopsS3Region | string | `""` | GitOps S3 Region |
-| gitopsS3Bucket | string | `""` | GitOps S3 Bucket |
-| gitopsS3AccessKey | string | `""` | GitOps S3 Access Key |
-| gitopsS3SecretKey | string | `""` | GitOps S3 Secret Key |
-| gitopsS3RootDir | string | `""` | GitOps S3 Root Directory in Bucket |
-| gitopsAzureFileFileUrlTemplate | string | `"https://%s.file.core.windows.net/%s/%s"` | GitOps Azure File Url Template |
-| gitopsAzureFileDirectoryUrlTemplate | string | `"https://%s.file.core.windows.net/%s"` | GitOps Azure File Url Template |
-| gitopsAzureFileStorageAccountName | string | `""` | GitOps Azure File Storage Account Name |
-| gitopsAzureFileShareName | string | `""` | GitOps Azure File Storage File Share Name in Storage Account |
-| gitopsAzureFileAccessKey | string | `""` | GitOps Azure File Access Key to File Share |
 | redisUrl | string | `""` | GitOps Redis Cache Url |
 | redisDbId | string | `"8"` | GitOps Redis Cache DB ID |
 | redisUseTls | string | `"false"` | GitOps Redis Cache Use TLS |
