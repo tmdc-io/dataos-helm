@@ -47,6 +47,7 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.imagePullSecrets.name }}
       {{- end }}
+      priorityClassName: {{ .Values.priorityClassName }}
       containers:
         - name: {{ .Values.name }}
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"

@@ -1,5 +1,10 @@
 # The instanceName should be the fully qualified name of the DataOS Instance like "demo-test-01.dataos.io"
 instanceName: 
+# The Prime APIKEY
+primeApiKey: 
+# The Prime Account ID
+primeAccountId: 
+
 # The mode can be api | prime
 mode: prime
 
@@ -11,9 +16,11 @@ serviceAccountName: dataos-manager-sa
 
 image:
   name: docker.io/tmdc/dataos-manager
-  tag: 0.9.6
+  tag: 0.11.3
 
 replicas: 2
+
+priorityClassName: system-cluster-critical
 
 # Include an image pull secret
 # imagePullSecrets: 
@@ -87,8 +94,6 @@ sopsBinary: /usr/local/bin/sops
 dataosCtlBinary: /usr/local/bin/dataos-ctl
 
 plutusUrl: https://prime.tmdata.io/plutus/api/v1
-primeApiKey: 
-primeAccountId: 
 enablePrimeSyncUp: true
 enablePrimeSyncExecute: true
 primeSyncIntervalUp: 10m
