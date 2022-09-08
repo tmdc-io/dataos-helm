@@ -16,7 +16,7 @@ serviceAccountName: dataos-manager-sa
 
 image:
   name: docker.io/tmdc/dataos-manager
-  tag: 0.11.3
+  tag: 0.12.1
 
 replicas: 2
 
@@ -111,6 +111,12 @@ gitopsTempDir: /opt/dataos/home/tmp
 redisUrl: redis-cache-master.caretaker.svc.cluster.local:6379
 redisDbId: 8
 redisUseTls: false
+
+# Defines the resource quota for the dataos-manager namespace
+resourceQuota:
+  podsQuota: 5
+  priorityClasses:
+  - system-cluster-critical
   
 # Use to Enable a Service Monitor
 # serviceMonitor:

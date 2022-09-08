@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Values.name }}-pods
+  labels:
+    app: {{ .Values.label }}
+    app.kubernetes.io/name: '{{ .Values.label }}'
+    app.kubernetes.io/component: 'configuration'
+    app.kubernetes.io/part-of: '{{ .Values.application }}'
+spec:
+  hard:
+    pods: {{ .Values.resourceQuota.podsQuota }}
+  scopeSelector:
+    matchExpressions:
+    - operator: In
+      scopeName: PriorityClass
+      values:
+{{ toYaml .Values.resourceQuota.priorityClasses | indent 6 }}
