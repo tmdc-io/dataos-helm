@@ -35,6 +35,8 @@ data:
   HELM_BINARY: {{ .Values.helmBinary | quote  }}
   SOPS_BINARY: {{ .Values.sopsBinary | quote  }}
   DATAOS_CTL_BINARY: {{ .Values.dataosCtlBinary | quote  }}
+  DATAOS_CTL_SCRIPT_DIR: {{ .Values.dataosCtlScriptDir | quote  }}
+  PULSAR_ADMIN_SERVICE_URL: {{ .Values.pulsarAdminServiceUrl | quote  }}
 
   PLUTUS_URL: {{ .Values.plutusUrl | quote  }}
   ENABLE_PRIME_SYNC_UP: {{ .Values.enablePrimeSyncUp | quote  }}
