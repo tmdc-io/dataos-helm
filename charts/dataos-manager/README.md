@@ -17,9 +17,6 @@ You will need to create a values.yaml file to configure the dataos-manager appli
 | instanceName | string | `""` | Fully Qualified Instance name `(ex. smiley-mouse.dataos.io)` |
 | primeSyncIntervalUp | string | `"10m"` | Interval to Heartbeat Prime |
 | primeSyncIntervalExecute | string | `"5m"` | Interval to Retrieve Execute Requests |
-| redisUrl | string | `""` | GitOps Redis Cache Url |
-| redisDbId | string | `"8"` | GitOps Redis Cache DB ID |
-| redisUseTls | string | `"false"` | GitOps Redis Cache Use TLS |
 
 ```sh
 helm repo add dataos https://tmdc-io.github.io/dataos-helm
