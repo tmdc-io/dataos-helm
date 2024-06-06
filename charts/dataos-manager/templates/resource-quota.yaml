@@ -1,3 +1,4 @@
+{{- if .Values.resourceQuota }}
 apiVersion: v1
 kind: ResourceQuota
 metadata:
@@ -17,3 +18,4 @@ spec:
       scopeName: PriorityClass
       values:
 {{ toYaml .Values.resourceQuota.priorityClasses | indent 6 }}
+{{- end }}

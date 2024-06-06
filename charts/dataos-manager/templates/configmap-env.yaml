@@ -50,9 +50,3 @@ data:
   GIT_ZIP_FILE_NAME: {{ .Values.gitZipFileName | quote  }}
   GITOPS_INSTALL_MANIFEST_FILE_NAME: {{ .Values.gitopsInstallManifestFileName | quote  }}
   GITOPS_TEMP_DIR: {{ .Values.gitopsTempDir | quote  }}
-
-{{- if .Values.redisUrl }}
-  REDIS_URL: {{ .Values.redisUrl | quote  }}
-  REDIS_DB_ID: {{ .Values.redisDbId | quote  }}
-  REDIS_USE_TLS: {{ .Values.redisUseTls | quote  }}
-{{- end }}

@@ -3,7 +3,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: {{ .Values.name }}-crb
+  name: {{ .Values.name }}-{{ .Values.namespace }}-crb
   {{- if .Values.rbac.annotations }}
   annotations:
 {{ toYaml .Values.rbac.annotations | indent 4 }}
