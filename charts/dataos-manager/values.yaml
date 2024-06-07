@@ -51,7 +51,6 @@ containerPorts:
 
 services:
   - name: dataos-manager
-    namespace: dataos-manager
     ports:
       - name: http
         port: 20220

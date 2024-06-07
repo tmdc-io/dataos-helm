@@ -2,13 +2,14 @@
 {{- $system := .Values.application -}}
 {{- $appName := .Values.name -}}
 {{- $appLabel := .Values.label -}}
+{{- $namespace := .Values.namespace -}}
 {{- range $service := .Values.services }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ $service.name }}
-  namespace: {{ $service.namespace }}
+  namespace: {{ $namespace }}
   {{- if $service.annotations }}
   annotations:
 {{ toYaml $service.annotations | indent 4 }}
