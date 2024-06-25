@@ -92,6 +92,7 @@ helmBinary: /usr/local/bin/helm
 sopsBinary: /usr/local/bin/sops
 dataosCtlBinary: /usr/local/bin/dataos-ctl
 dataosCtlScriptDir: /opt/dataos
+dataosCtlBaseConfigDir: /etc/dataos
 
 pulsarAdminServiceUrl: https://pulsar-proxy.caretaker.svc.cluster.local:443
 
