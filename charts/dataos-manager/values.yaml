@@ -97,6 +97,7 @@ dataosCtlBaseConfigDir: /etc/dataos
 pulsarAdminServiceUrl: https://pulsar-proxy.caretaker.svc.cluster.local:443
 
 plutusUrl: https://prime.tmdata.io/plutus/api/v1
+hephUrl: https://prime.tmdata.io/heph/api/v1
 enablePrimeSyncUp: true
 enablePrimeSyncExecute: true
 primeSyncIntervalUp: 10m
