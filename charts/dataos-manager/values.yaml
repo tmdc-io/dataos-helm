@@ -16,7 +16,7 @@ serviceAccountName: dataos-manager-sa
 
 image:
   name: docker.io/tmdc/dataos-manager
-  tag: 0.15.0
+  tag: 0.18.8
 
 replicas: 2
 
@@ -102,6 +102,7 @@ enablePrimeSyncUp: true
 enablePrimeSyncExecute: true
 primeSyncIntervalUp: 10m
 primeSyncIntervalExecute: 5m
+instanceSyncTarget: plutus
 
 gitSubDir: git
 gitTMinus1Dir: git-t-1

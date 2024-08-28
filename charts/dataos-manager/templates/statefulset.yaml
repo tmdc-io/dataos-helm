@@ -59,6 +59,9 @@ spec:
             - {{ .Values.mode | quote }}
             - --instance-name
             - {{ .Values.instanceName | quote }}
+            {{ if .Values.additionalCommandArguments }}
+{{ toYaml .Values.additionalCommandArguments | indent 12 }}
+            {{- end }}
           envFrom:
             - secretRef:
                 name: {{ .Values.name }}-env
@@ -75,6 +78,12 @@ spec:
                   fieldPath: metadata.namespace
             - name: SERVICE_NAME
               value: {{ .Values.name }}
+          {{- if .Values.environment }}
+          {{- range $conf, $value := .Values.environment }}
+            - name: {{ $conf | quote }}
+              value: {{ $value | quote }}
+          {{- end }}
+          {{- end }}
           {{- if .Values.containerPorts }}
           ports:
 {{ toYaml .Values.containerPorts | indent 10 }}

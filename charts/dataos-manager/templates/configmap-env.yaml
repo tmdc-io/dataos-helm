@@ -45,6 +45,7 @@ data:
   ENABLE_PRIME_SYNC_EXECUTE: {{ .Values.enablePrimeSyncExecute | quote  }}
   PRIME_SYNC_INTERVAL_UP: {{ .Values.primeSyncIntervalUp | quote  }}
   PRIME_SYNC_INTERVAL_EXECUTE: {{ .Values.primeSyncIntervalExecute | quote  }}
+  INSTANCE_SYNC_TARGET: {{ .Values.instanceSyncTarget | quote  }}
 
   GIT_SUB_DIR: {{ .Values.gitSubDir | quote  }}
   GIT_T_MINUS_1_DIR: {{ .Values.gitTMinus1Dir | quote  }}
