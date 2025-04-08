@@ -94,7 +94,7 @@ dataosCtlBinary: /usr/local/bin/dataos-ctl
 dataosCtlScriptDir: /opt/dataos
 dataosCtlBaseConfigDir: /etc/dataos
 
-pulsarAdminServiceUrl: https://pulsar-proxy.caretaker.svc.cluster.local:443
+pulsarAdminServiceUrl: http://pulsar-broker.caretaker.svc.cluster.local:8080
 
 plutusUrl: https://prime.tmdata.io/plutus/api/v1
 hephUrl: https://prime.tmdata.io/heph/api/v1
