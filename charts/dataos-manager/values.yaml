@@ -118,8 +118,8 @@ resourceQuota:
   - system-cluster-critical
   
 # Use to Enable a Service Monitor
-# serviceMonitor:
-#   endpoints:
-#   - targetPort: metrics
-#     interval: 30s
-#     scrapeTimeout: 30s
+serviceMonitor:
+  endpoints:
+  - targetPort: metrics
+    interval: 30s
+    scrapeTimeout: 30s
