@@ -40,6 +40,7 @@ data:
   PULSAR_ADMIN_SERVICE_URL: {{ .Values.pulsarAdminServiceUrl | quote  }}
 
   PLUTUS_URL: {{ .Values.plutusUrl | quote  }}
+  MDC_URL: {{ .Values.mdcUrl | quote  }}
   HEPH_URL: {{ .Values.hephUrl | quote  }}
   ENABLE_PRIME_SYNC_UP: {{ .Values.enablePrimeSyncUp | quote  }}
   ENABLE_PRIME_SYNC_EXECUTE: {{ .Values.enablePrimeSyncExecute | quote  }}
@@ -53,3 +54,19 @@ data:
   GIT_ZIP_FILE_NAME: {{ .Values.gitZipFileName | quote  }}
   GITOPS_INSTALL_MANIFEST_FILE_NAME: {{ .Values.gitopsInstallManifestFileName | quote  }}
   GITOPS_TEMP_DIR: {{ .Values.gitopsTempDir | quote  }}
+
+  GITOPS_PROVIDER_TYPE: {{ .Values.gitOpsProviderType | quote  }}
+  GITOPS_ROOT_DIR: {{ .Values.gitOpsRootDir | quote  }}
+  EXECUTE_TASKS_PROVIDER_TYPE: {{ .Values.executeTasksProviderType | quote  }}
+  EXECUTE_TASKS_ROOT_DIR: {{ .Values.executeTasksRootDir | quote  }}
+  S3_ENDPOINT: {{ .Values.s3Endpoint | quote  }}
+  S3_REGION: {{ .Values.s3Region | quote  }}
+  S3_BUCKET: {{ .Values.s3Bucket | quote  }}
+  S3_ACCESSKEY: {{ .Values.s3AccessKey | quote  }}
+  S3_SECRETKEY: {{ .Values.s3SecretKey | quote  }}
+  S3_DISABLE_SSL: {{ .Values.s3DisableSsl | quote  }}
+  S3_FORCE_PATH_STYLE: {{ .Values.s3ForcePathStyle | quote  }}
+  AZURE_BLOB_STORAGE_ACCOUNT: {{ .Values.azureBlobStorageAccount | quote  }}
+  AZURE_BLOB_ENDPOINT_SUFFIX: {{ .Values.azureBlobEndpointSuffix | quote  }}
+  AZURE_BLOB_CONTAINER: {{ .Values.azureBlobContainer | quote  }}
+  AZURE_BLOB_SECRETKEY: {{ .Values.azureBlobSecretKey | quote  }}

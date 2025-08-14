@@ -16,20 +16,15 @@ serviceAccountName: dataos-manager-sa
 
 image:
   name: docker.io/tmdcio/dataos-manager
-  tag: 0.19.6
+  tag: 0.19.9
 
-replicas: 2
+replicas: 1
 
 priorityClassName: system-cluster-critical
 
 # Include an image pull secret
 # imagePullSecrets: 
 #   name: dataos-manager-pull-secret
-
-# Include an image pull secret
-# imagePullSecret:
-#   name: dataos-manager-pull-secret
-#   type: kubernetes.io/dockerconfigjson
 
 # Include install files as a Volume from a ConfigMap or Secret
 # volumes:
@@ -96,14 +91,17 @@ dataosCtlBaseConfigDir: /etc/dataos
 
 pulsarAdminServiceUrl: http://pulsar-broker.caretaker.svc.cluster.local:8080
 
-plutusUrl: https://prime.tmdata.io/plutus/api/v1
+mdcUrl: 
 hephUrl: https://prime.tmdata.io/heph/api/v1
 enablePrimeSyncUp: true
 enablePrimeSyncExecute: true
 primeSyncIntervalUp: 10m
 primeSyncIntervalExecute: 5m
 instanceSyncTarget: plutus
+plutusUrl: https://prime.tmdata.io/plutus/api/v1
 
+gitOpsProviderType: 
+gitOpsRootDir: 
 gitSubDir: git
 gitTMinus1Dir: git-t-1
 gitSubSubDir: git
@@ -111,15 +109,30 @@ gitZipFileName: gitops.zip
 gitopsInstallManifestFileName: dataos.release.yaml
 gitopsTempDir: /opt/dataos/home/tmp
 
+executeTasksProviderType: 
+executeTasksRootDir: 
+
+s3Endpoint: 
+s3Region: 
+s3Bucket: 
+s3AccessKey: 
+s3SecretKey: 
+s3DisableSsl: false
+s3ForcePathStyle: false
+azureBlobStorageAccount: 
+azureBlobEndpointSuffix: 
+azureBlobContainer: 
+azureBlobSecretKey: 
+
 # Defines the resource quota for the dataos-manager namespace
 resourceQuota:
   podsQuota: 5
   priorityClasses:
   - system-cluster-critical
-  
+
 # Use to Enable a Service Monitor
-serviceMonitor:
-  endpoints:
-  - targetPort: metrics
-    interval: 30s
-    scrapeTimeout: 30s
+# serviceMonitor:
+#   endpoints:
+#   - targetPort: metrics
+#     interval: 30s
+#     scrapeTimeout: 30s
