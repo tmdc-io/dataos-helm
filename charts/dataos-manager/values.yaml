@@ -124,6 +124,9 @@ azureBlobEndpointSuffix:
 azureBlobContainer: 
 azureBlobSecretKey: 
 
+nodeSelector:
+  dataos.io/purpose: core-kernel
+
 # Defines the resource quota for the dataos-manager namespace
 resourceQuota:
   podsQuota: 5
