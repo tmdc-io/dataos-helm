@@ -48,6 +48,10 @@ spec:
         - name: {{ .Values.imagePullSecrets.name }}
       {{- end }}
       priorityClassName: {{ .Values.priorityClassName }}
+      {{- if .Values.podSecurityContext }}
+      securityContext:
+{{ toYaml .Values.podSecurityContext | indent 8 }}
+      {{- end }}
       containers:
         - name: {{ .Values.name }}
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
