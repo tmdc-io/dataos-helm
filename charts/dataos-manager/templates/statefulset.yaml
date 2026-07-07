@@ -121,6 +121,9 @@ spec:
           - name: cloud-kernel-json
             mountPath: "/etc/cloudkernel"
             readOnly: true
+          {{- if .Values.volumeMounts }}
+{{ toYaml .Values.volumeMounts | indent 10 }}
+          {{- end }}
           {{- else if .Values.volumeMounts }}
           volumeMounts:
 {{ toYaml .Values.volumeMounts | indent 10 }}
@@ -270,7 +273,14 @@ spec:
         - name: cloud-kernel-json
           secret:
             secretName: cloud-kernel-json
+      {{- if .Values.volumes }}
+{{ toYaml .Values.volumes | indent 8 }}
+      {{- end }}
       {{- else if .Values.volumes }}
       volumes:
 {{ toYaml .Values.volumes | indent 8 }}
       {{- end }}
+  {{- if .Values.volumeClaimTemplates }}
+  volumeClaimTemplates:
+{{ toYaml .Values.volumeClaimTemplates | indent 4 }}
+  {{- end }}
