@@ -93,6 +93,8 @@ pulsarAdminServiceUrl: http://pulsar-broker.caretaker.svc.cluster.local:8080
 
 mdcUrl: 
 hephUrl: https://prime.tmdata.io/heph/api/v1
+# Skip TLS verification for heph client (needed for cluster-local private CA certs)
+hephInsecure: true
 enablePrimeSyncUp: true
 enablePrimeSyncExecute: true
 primeSyncIntervalUp: 10m

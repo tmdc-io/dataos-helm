@@ -42,6 +42,7 @@ data:
   PLUTUS_URL: {{ .Values.plutusUrl | quote  }}
   MDC_URL: {{ .Values.mdcUrl | quote  }}
   HEPH_URL: {{ .Values.hephUrl | quote  }}
+  HEPH_INSECURE: {{ .Values.hephInsecure | quote  }}
   ENABLE_PRIME_SYNC_UP: {{ .Values.enablePrimeSyncUp | quote  }}
   ENABLE_PRIME_SYNC_EXECUTE: {{ .Values.enablePrimeSyncExecute | quote  }}
   PRIME_SYNC_INTERVAL_UP: {{ .Values.primeSyncIntervalUp | quote  }}
