@@ -76,6 +76,8 @@ baseUriPath: /manager
 metricPort: 20222
 ginMode: release
 
+fips: disabled
+
 homeDir: /opt/dataos/home
 operateSubDir: operate
 helmFetchSubDir: charts

@@ -82,6 +82,13 @@ spec:
                   fieldPath: metadata.namespace
             - name: SERVICE_NAME
               value: {{ .Values.name }}
+            {{- if eq (.Values.fips | default "disabled") "enabled" }}
+            - name: GODEBUG
+              value: "fips140=on"
+            {{- else }}
+            - name: GODEBUG
+              value: "fips140=off"
+            {{- end }}
           {{- if .Values.environment }}
           {{- range $conf, $value := .Values.environment }}
             - name: {{ $conf | quote }}
