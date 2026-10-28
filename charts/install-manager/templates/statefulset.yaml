@@ -1,0 +1,161 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace }}
+  {{- if .Values.statefulsetAnnotations }}
+  annotations:
+{{ toYaml .Values.statefulsetAnnotations | indent 4 }}
+  {{- end }}
+  labels:
+    app: {{ .Values.label }}
+    app.kubernetes.io/name: {{ .Values.label }}
+    app.kubernetes.io/component: 'application'
+    app.kubernetes.io/part-of: '{{ .Values.application }}'
+    {{- if .Values.statefulsetLabels }}
+{{ toYaml .Values.statefulsetLabels | indent 4 }}
+    {{- end }}
+spec:
+  replicas: {{ .Values.replicas }}
+  serviceName: {{ .Values.name }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  updateStrategy:
+    type: RollingUpdate
+  podManagementPolicy: Parallel
+  template:
+    metadata:
+      name: {{ .Values.name }}
+      labels:
+        app: {{ .Values.label }}
+        app.kubernetes.io/name: {{ .Values.label }}
+        app.kubernetes.io/component: 'application'
+        app.kubernetes.io/part-of: {{ .Values.application }}
+        {{- if .Values.podLabels }}
+{{ toYaml .Values.podLabels | indent 8 }}
+        {{- end }}
+      {{- if .Values.podAnnotations }}
+      annotations:
+{{ toYaml .Values.podAnnotations | indent 8 }}
+      {{- end }}
+    spec:
+      {{- with .Values.serviceAccountName }}
+      serviceAccountName: {{ . }}
+      {{- end }}
+      {{ if .Values.imagePullSecrets }}
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecrets.name }}
+      {{- end }}
+      priorityClassName: {{ .Values.priorityClassName }}
+      {{- if .Values.podSecurityContext }}
+      securityContext:
+{{ toYaml .Values.podSecurityContext | indent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Values.name }}
+          image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          command: ["/opt/dataos/dataos-manager"]
+          args:
+            - server
+            - --mode
+            - {{ .Values.mode | quote }}
+            - --instance-name
+            - {{ .Values.envFQDN | quote }}
+            {{ if .Values.additionalCommandArguments }}
+{{ toYaml .Values.additionalCommandArguments | indent 12 }}
+            {{- end }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.name }}-env
+            - configMapRef:
+                name: {{ .Values.name }}-env
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: SERVICE_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: SERVICE_NAME
+              value: {{ .Values.name }}
+            {{- if eq (.Values.fips | default "disabled") "enabled" }}
+            - name: GODEBUG
+              value: "fips140=on"
+            {{- else }}
+            - name: GODEBUG
+              value: "fips140=off"
+            {{- end }}
+          {{- if .Values.environment }}
+          {{- range $conf, $value := .Values.environment }}
+            - name: {{ $conf | quote }}
+              value: {{ $value | quote }}
+          {{- end }}
+          {{- end }}
+          {{- if .Values.containerPorts }}
+          ports:
+{{ toYaml .Values.containerPorts | indent 10 }}
+          {{- else }}
+          ports:
+          - name: http
+            containerPort: {{ .Values.image.port }}
+            protocol: TCP
+          {{- end }}
+          {{- if .Values.securityContext }}
+          securityContext:
+{{ toYaml .Values.securityContext | indent 12 }}
+          {{- else}}
+          securityContext:
+            privileged: false
+          {{- end }}
+          {{- range $conf, $value := .Values.containerFields }}
+          {{$conf}}: {{$value}}
+          {{- end }}
+          {{- if .Values.resources }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+          {{- end }}
+          {{ if .Values.cloudKernelJson -}}
+          volumeMounts:
+          - name: cloud-kernel-json
+            mountPath: "/etc/cloudkernel"
+            readOnly: true
+          {{- if .Values.volumeMounts }}
+{{ toYaml .Values.volumeMounts | indent 10 }}
+          {{- end }}
+          {{- else if .Values.volumeMounts }}
+          volumeMounts:
+{{ toYaml .Values.volumeMounts | indent 10 }}
+          {{- end }}
+          {{- if .Values.workingDir }}
+          workingDir: {{ .Values.workingDir | quote }}
+          {{- end }}
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+      {{- end }}
+      {{- if .Values.tolerations }}
+      tolerations:
+{{ toYaml .Values.tolerations | indent 8 }}
+      {{- end }}
+      {{ if .Values.cloudKernelJson -}}
+      volumes:
+        - name: cloud-kernel-json
+          secret:
+            secretName: cloud-kernel-json
+      {{- if .Values.volumes }}
+{{ toYaml .Values.volumes | indent 8 }}
+      {{- end }}
+      {{- else if .Values.volumes }}
+      volumes:
+{{ toYaml .Values.volumes | indent 8 }}
+      {{- end }}
+  {{- if .Values.volumeClaimTemplates }}
+  volumeClaimTemplates:
+{{ toYaml .Values.volumeClaimTemplates | indent 4 }}
+  {{- end }}

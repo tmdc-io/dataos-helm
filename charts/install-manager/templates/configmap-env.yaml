@@ -1,0 +1,92 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Values.name }}-env
+  labels:
+    app: {{ .Values.label }}
+    app.kubernetes.io/name: '{{ .Values.label }}'
+    app.kubernetes.io/component: 'configuration'
+    app.kubernetes.io/part-of: '{{ .Values.application }}'
+data:
+  LOG_LEVEL: {{ .Values.logLevel | quote  }}
+
+  META_PRODUCT_NAME: {{ .Values.metaProductName | quote  }}
+  META_MY_NAME: {{ .Values.metaMyName | quote  }}
+  ENV_TYPE: {{ .Values.envType | quote  }}
+  INSTANCE_ID: {{ .Values.instanceId | quote  }}
+  TOKEN_HASH_TYPE: {{ .Values.tokenHashType | quote  }}
+
+  LEADER_ELECTION_LEASE_NAMESPACE: {{ .Values.namespace | quote }}
+
+  HTTP_PORT: {{ .Values.httpPort | quote  }}
+  HTTP_SCHEME: {{ .Values.httpScheme | quote  }}
+  TLS_CRT_FILE: {{ .Values.tlsCrtFile | quote  }}
+  TLS_KEY_FILE: {{ .Values.tlsKeyFile | quote  }}
+  BASE_URI_PATH: {{ .Values.baseUriPath | quote  }}
+  METRIC_PORT: {{ .Values.metricPort | quote  }}
+  GIN_MODE: {{ .Values.ginMode | quote  }}
+
+  HOME_DIR: {{ .Values.homeDir | quote  }}
+  OPERATE_SUB_DIR: {{ .Values.operateSubDir | quote  }}
+  HELM_FETCH_SUB_DIR: {{ .Values.helmFetchSubDir | quote  }}
+  TEMPLATE_SUB_DIR: {{ .Values.templateSubDir | quote  }}
+  RENDER_SUB_DIR: {{ .Values.renderSubDir | quote  }}
+  DEFAULT_CHART_REPO: {{ .Values.defaultChartRepo | quote  }}
+  HELM_EXPERIMENTAL_OCI: "1"
+  
+  HELM_BINARY: {{ .Values.helmBinary | quote  }}
+  SOPS_BINARY: {{ .Values.sopsBinary | quote  }}
+  DATAOS_CTL_BINARY: {{ .Values.dataosCtlBinary | quote  }}
+  DATAOS_CTL_SCRIPT_DIR: {{ .Values.dataosCtlScriptDir | quote  }}
+  DATAOS_CTL_CONFIG_DIR: {{ .Values.dataosCtlBaseConfigDir | quote  }}
+  HELM_CONFIG_HOME: {{ .Values.helmConfigHome | quote  }}
+  HELM_CACHE_HOME: {{ .Values.helmCacheHome | quote  }}
+  HELM_DATA_HOME: {{ .Values.helmDataHome | quote  }}
+
+  MDC_URL: {{ .Values.mdcUrl | quote  }}
+  HEPH_URL: {{ .Values.hephUrl | quote  }}
+  HEPH_INSECURE: {{ .Values.hephInsecure | quote  }}
+  ENABLE_PRIME_SYNC_UP: {{ .Values.enablePrimeSyncUp | quote  }}
+  ENABLE_PRIME_SYNC_EXECUTE: {{ .Values.enablePrimeSyncExecute | quote  }}
+  PRIME_SYNC_INTERVAL_UP: {{ .Values.primeSyncIntervalUp | quote  }}
+  PRIME_SYNC_INTERVAL_EXECUTE: {{ .Values.primeSyncIntervalExecute | quote  }}
+
+  GIT_SUB_DIR: {{ .Values.gitSubDir | quote  }}
+  GIT_T_MINUS_1_DIR: {{ .Values.gitTMinus1Dir | quote  }}
+  GIT_SUB_SUB_DIR: {{ .Values.gitSubSubDir | quote  }}
+  GIT_ZIP_FILE_NAME: {{ .Values.gitZipFileName | quote  }}
+  GITOPS_INSTALL_MANIFEST_FILE_NAME: {{ .Values.gitopsInstallManifestFileName | quote  }}
+  GITOPS_TEMP_DIR: {{ .Values.gitopsTempDir | quote  }}
+
+  GITOPS_PROVIDER_TYPE: {{ .Values.gitOpsProviderType | quote  }}
+  GITOPS_ROOT_DIR: {{ .Values.gitOpsRootDir | quote  }}
+  EXECUTE_TASKS_PROVIDER_TYPE: {{ .Values.executeTasksProviderType | quote  }}
+  EXECUTE_TASKS_ROOT_DIR: {{ .Values.executeTasksRootDir | quote  }}
+
+  INCLUDE_RESOURCE_FILTERS: {{ .Values.includeResourceFilters | quote  }}
+
+  {{- if .Values.s3Endpoint }}
+  S3_ENDPOINT: {{ .Values.s3Endpoint | quote  }}
+  {{- end }}
+  {{- if .Values.s3Region }}
+  S3_REGION: {{ .Values.s3Region | quote  }}
+  {{- end }}
+  {{- if .Values.s3Bucket }}
+  S3_BUCKET: {{ .Values.s3Bucket | quote  }}
+  {{- end }}
+  {{- if .Values.s3DisableSsl }}
+  S3_DISABLE_SSL: {{ .Values.s3DisableSsl | quote  }}
+  {{- end }}
+  {{- if .Values.s3ForcePathStyle }}
+  S3_FORCE_PATH_STYLE: {{ .Values.s3ForcePathStyle | quote  }}
+  {{- end }}
+  {{- if .Values.azureBlobStorageAccount }}
+  AZURE_BLOB_STORAGE_ACCOUNT: {{ .Values.azureBlobStorageAccount | quote  }}
+  {{- end }}
+  {{- if .Values.azureBlobEndpointSuffix }}
+  AZURE_BLOB_ENDPOINT_SUFFIX: {{ .Values.azureBlobEndpointSuffix | quote  }}
+  {{- end }}
+  {{- if .Values.azureBlobContainer }}
+  AZURE_BLOB_CONTAINER: {{ .Values.azureBlobContainer | quote  }}
+  {{- end }}

@@ -1,0 +1,32 @@
+{{- if .Values.serviceMonitor }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ .Values.name }}-svc-monitor
+  namespace: {{ .Values.namespace }}
+  {{- if .Values.serviceMonitor.annotations }}
+  annotations:
+{{ toYaml .Values.serviceMonitor.annotations | indent 4 }}
+  {{- end }}
+  labels:
+    app: {{ .Values.label }}
+    app.kubernetes.io/name: {{ .Values.label }}
+    app.kubernetes.io/component: 'service-monitor'
+    app.kubernetes.io/part-of: '{{ .Values.application }}'
+    {{- if .Values.serviceMonitor.labels }}
+{{ toYaml .Values.serviceMonitor.labels | indent 4 }}
+    {{- end }}
+spec:
+  jobLabel: {{ .Values.name }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Values.label }}
+      app.kubernetes.io/part-of: {{ .Values.application }}
+  namespaceSelector:
+    matchNames:
+      - {{ .Values.namespace }}
+  {{- if .Values.serviceMonitor.endpoints }}
+  endpoints:
+{{ toYaml .Values.serviceMonitor.endpoints | indent 2 }}
+  {{- end }}
+{{- end }}

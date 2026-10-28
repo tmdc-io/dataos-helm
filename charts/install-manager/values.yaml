@@ -1,0 +1,509 @@
+# The instanceName should be the fully qualified name of the Install Instance target like "demo-test-01.moderndata.cloud"
+instanceName: 
+# The instanceId is the short unique identifier of the Install Instance Target like "demotest01"
+instanceId: 
+# The envType is the short code for the Install Instance Target like "iks" | "dks"
+envType: 
+# The Prime APIKEY
+primeApiKey: 
+# The Prime Account ID
+primeAccountId: 
+# The modern data prime url
+mdcUrl: 
+# The forge url
+hephUrl: 
+# The forge APIKEY
+hephApiKey: 
+# The age materials for encryption and decryption of inputs
+ageRecipient:
+ageKey: 
+
+# The mode can be api | prime
+mode: prime
+
+name: dataos-manager
+namespace: dataos-manager
+application: install
+label: dataos-manager
+serviceAccountName: dataos-manager-sa
+
+image:
+  name: docker.io/tmdcio/dataos-manager
+  tag: 0.34.4
+
+replicas: 1
+
+priorityClassName: system-cluster-critical
+
+securityContext:
+  runAsUser: 10001
+  runAsGroup: 10001
+  runAsNonRoot: true
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false
+  capabilities:
+    drop:
+      - ALL
+  seccompProfile:
+    type: RuntimeDefault
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 10001
+  runAsGroup: 10001
+  fsGroup: 10001
+  fsGroupChangePolicy: Always
+  seccompProfile:
+    type: RuntimeDefault
+
+# Include an image pull secret
+# imagePullSecrets: 
+#   name: dataos-manager-pull-secret
+
+# Include the cloud kernel json
+# cloudKernelJson: 
+
+containerPorts:
+  - name: http
+    containerPort: 20220
+
+services:
+  - name: dataos-manager
+    ports:
+      - name: http
+        port: 20220
+
+resources:
+  requests:
+    cpu: 150m
+    memory: 400Mi
+rbac:
+  serviceAccount: true
+  clusterRoleBinding:
+    roleRef:
+      kind: ClusterRole
+      apiGroup: rbac.authorization.k8s.io
+      name: cluster-admin
+rbac:
+  serviceAccount: true
+  clusterRoleBinding:
+    roleRef:
+      kind: ClusterRole
+      apiGroup: rbac.authorization.k8s.io
+      name: install-manager-role
+  clusterRole:
+    name: install-manager-role
+    rules:
+      - apiGroups:
+        - ""
+        resources:
+        - configmaps
+        - events
+        - namespaces
+        - nodes
+        - resourcequotas
+        - persistentvolumes
+        - persistentvolumes/status
+        - persistentvolumeclaims
+        - persistentvolumeclaims/status
+        - pods
+        - pods/status
+        - pods/log
+        - secrets
+        - serviceaccounts
+        - services
+        - services/status
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - coordination.k8s.io
+        resources:
+        - leases
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - admissionregistration.k8s.io
+        resources:
+        - mutatingwebhookconfigurations
+        - validatingwebhookconfigurations
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - apiextensions.k8s.io
+        resources:
+        - customresourcedefinitions
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - apps
+        resources:
+        - daemonsets
+        - deployments
+        - replicasets
+        - statefulsets
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - argoproj.io
+        resources:
+        - cronworkflows
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - autoscaling
+        resources:
+        - horizontalpodautoscalers
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - batch
+        resources:
+        - jobs
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - capsule.clastix.io
+        resources:
+        - capsuleconfigurations
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - cert-manager.io
+        resources:
+        - certificates
+        - clusterissuers
+        - issuers
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - configuration.konghq.com
+        resources:
+        - kongclusterplugins
+        - tcpingresses
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - gateway.networking.k8s.io
+        resources:
+        - gatewayclasses
+        - gateways
+        - grpcroutes
+        - httproutes
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - monitoring.coreos.com
+        resources:
+        - alertmanagers
+        - podmonitors
+        - prometheuses
+        - servicemonitors
+        - thanosrulers
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - networking.k8s.io
+        resources:
+        - ingressclasses
+        - ingresses
+        - networkpolicies
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - networking.istio.io
+        resources:
+        - destinationrules
+        - virtualservices
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - opensearch.org
+        resources:
+        - opensearchclusters
+        - opensearchindextemplates
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - postgresql.cnpg.io
+        resources:
+        - clusters
+        - databases
+        - poolers
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - rbac.authorization.k8s.io
+        resources:
+        - clusterrolebindings
+        - clusterroles
+        - rolebindings
+        - roles
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+        - escalate
+        - bind
+      - apiGroups:
+        - security.istio.io
+        resources:
+        - peerauthentications
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - scheduling.k8s.io
+        resources:
+        - priorityclasses
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - storage.k8s.io
+        resources:
+        - storageclasses
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - velero.io
+        resources:
+        - backupstoragelocations
+        - volumesnapshotlocations
+        - schedules
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - ts.opentelekomcloud.com
+        resources:
+        - typesenseclusters
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - apiGroups:
+        - policy
+        resources:
+        - poddisruptionbudgets
+        verbs:
+        - create
+        - delete
+        - get
+        - list
+        - patch
+        - update
+        - watch
+
+includeResourceFilters: '[{"group":"","kind":"ConfigMap"},{"group":"","kind":"Event"},{"group":"","kind":"Namespace"},{"group":"","kind":"Node"},{"group":"","kind":"ResourceQuota"},{"group":"","kind":"PersistentVolume"},{"group":"","kind":"PersistentVolumeClaim"},{"group":"","kind":"Pod"},{"group":"","kind":"Secret"},{"group":"","kind":"ServiceAccount"},{"group":"","kind":"Service"},{"group":"coordination.k8s.io","kind":"Lease"},{"group":"admissionregistration.k8s.io","kind":"MutatingWebhookConfiguration"},{"group":"admissionregistration.k8s.io","kind":"ValidatingWebhookConfiguration"},{"group":"apiextensions.k8s.io","kind":"CustomResourceDefinition"},{"group":"apps","kind":"DaemonSet"},{"group":"apps","kind":"Deployment"},{"group":"apps","kind":"ReplicaSet"},{"group":"apps","kind":"StatefulSet"},{"group":"argoproj.io","kind":"CronWorkflow"},{"group":"autoscaling","kind":"HorizontalPodAutoscaler"},{"group":"batch","kind":"Job"},{"group":"capsule.clastix.io","kind":"CapsuleConfiguration"},{"group":"cert-manager.io","kind":"Certificate"},{"group":"cert-manager.io","kind":"ClusterIssuer"},{"group":"cert-manager.io","kind":"Issuer"},{"group":"configuration.konghq.com","kind":"KongClusterPlugin"},{"group":"configuration.konghq.com","kind":"TCPIngress"},{"group":"gateway.networking.k8s.io","kind":"GatewayClass"},{"group":"gateway.networking.k8s.io","kind":"Gateway"},{"group":"gateway.networking.k8s.io","kind":"GRPCRoute"},{"group":"gateway.networking.k8s.io","kind":"HTTPRoute"},{"group":"monitoring.coreos.com","kind":"Alertmanager"},{"group":"monitoring.coreos.com","kind":"PodMonitor"},{"group":"monitoring.coreos.com","kind":"Prometheus"},{"group":"monitoring.coreos.com","kind":"ServiceMonitor"},{"group":"monitoring.coreos.com","kind":"ThanosRuler"},{"group":"networking.k8s.io","kind":"IngressClass"},{"group":"networking.k8s.io","kind":"Ingress"},{"group":"networking.k8s.io","kind":"NetworkPolicy"},{"group":"networking.istio.io","kind":"DestinationRule"},{"group":"networking.istio.io","kind":"VirtualService"},{"group":"opensearch.org","kind":"OpenSearchCluster"},{"group":"opensearch.org","kind":"OpensearchIndexTemplate"},{"group":"postgresql.cnpg.io","kind":"Cluster"},{"group":"postgresql.cnpg.io","kind":"Database"},{"group":"postgresql.cnpg.io","kind":"Pooler"},{"group":"rbac.authorization.k8s.io","kind":"ClusterRoleBinding"},{"group":"rbac.authorization.k8s.io","kind":"ClusterRole"},{"group":"rbac.authorization.k8s.io","kind":"RoleBinding"},{"group":"rbac.authorization.k8s.io","kind":"Role"},{"group":"security.istio.io","kind":"PeerAuthentication"},{"group":"scheduling.k8s.io","kind":"PriorityClass"},{"group":"storage.k8s.io","kind":"StorageClass"},{"group":"velero.io","kind":"BackupStorageLocation"},{"group":"velero.io","kind":"VolumeSnapshotLocation"},{"group":"velero.io","kind":"Schedule"},{"group":"ts.opentelekomcloud.com","kind":"TypesenseCluster"},{"group":"policy","kind":"PodDistruptionBudget"}]'
+
+logLevel: info
+metaProductName: dataos
+metaMyName: dataos-manager
+
+httpPort: 20220
+httpScheme: http
+tlsCrtFile: /etc/dataos/certs/tls.crt
+tlsKeyFile: /etc/dataos/certs/tls.key
+baseUriPath: /manager
+ginMode: release
+
+fips: disabled
+tokenHashType: md5
+
+homeDir: /opt/dataos/home
+operateSubDir: operate
+helmFetchSubDir: charts
+templateSubDir: deploy
+renderSubDir: rendered
+defaultChartRepo: dataos-base
+
+volumeMounts:
+  - name: home
+    mountPath: "/opt/dataos/home"
+volumes:
+  - name: home
+    emptyDir: {}
+
+helmBinary: /usr/local/bin/helm
+sopsBinary: /usr/local/bin/sops
+dataosCtlBinary: /usr/local/bin/dataos-ctl-v3
+dataosCtlScriptDir: /opt/dataos/v3
+dataosCtlBaseConfigDir: /etc/dataos/v3
+helmConfigHome: /opt/dataos/home/helm/.config
+helmCacheHome: /opt/dataos/home/helm/.cache
+helmDataHome: /opt/dataos/home/helm/.local
+
+# Skip TLS verification for heph client (needed for cluster-local private CA certs)
+hephInsecure: true
+enablePrimeSyncUp: true
+enablePrimeSyncExecute: true
+primeSyncIntervalUp: 5m
+primeSyncIntervalExecute: 30s
+
+gitOpsProviderType: 
+gitOpsRootDir: gitopsroot
+gitSubDir: git
+gitTMinus1Dir: git-t-1
+gitSubSubDir: git
+gitZipFileName: gitops.zip
+gitopsInstallManifestFileName: dataos.release.yaml
+gitopsTempDir: /opt/dataos/home/tmp
+
+executeTasksProviderType: 
+executeTasksRootDir: executetasksroot
+
+# these values supply the location to store gitops outputs
+# s3Endpoint: 
+# s3Region: 
+# s3Bucket: 
+# s3AccessKey: 
+# s3SecretKey: 
+# s3DisableSsl: false
+# s3ForcePathStyle: false
+# azureBlobStorageAccount: 
+# azureBlobEndpointSuffix: 
+# azureBlobContainer: 
+# azureBlobSecretKey: 
+
+# Defines the resource quota for the dataos-manager namespace
+resourceQuota:
+  podsQuota: 5
+  priorityClasses:
+  - system-cluster-critical
+
+# Use to Enable a Service Monitor
+# serviceMonitor:
+#   endpoints:
+#   - targetPort: http
+#     interval: 30s
+#     scrapeTimeout: 30s
