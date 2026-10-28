@@ -24,7 +24,6 @@ data:
   TLS_CRT_FILE: {{ .Values.tlsCrtFile | quote  }}
   TLS_KEY_FILE: {{ .Values.tlsKeyFile | quote  }}
   BASE_URI_PATH: {{ .Values.baseUriPath | quote  }}
-  METRIC_PORT: {{ .Values.metricPort | quote  }}
   GIN_MODE: {{ .Values.ginMode | quote  }}
 
   HOME_DIR: {{ .Values.homeDir | quote  }}

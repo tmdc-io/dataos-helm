@@ -488,8 +488,8 @@ executeTasksRootDir: executetasksroot
 # s3Bucket: 
 # s3AccessKey: 
 # s3SecretKey: 
-# s3DisableSsl: false
-# s3ForcePathStyle: false
+s3DisableSsl: false
+s3ForcePathStyle: false
 # azureBlobStorageAccount: 
 # azureBlobEndpointSuffix: 
 # azureBlobContainer: 
