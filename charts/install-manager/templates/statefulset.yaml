@@ -62,7 +62,7 @@ spec:
             - --mode
             - {{ .Values.mode | quote }}
             - --instance-name
-            - {{ .Values.envFQDN | quote }}
+            - {{ .Values.instanceName | quote }}
             {{ if .Values.additionalCommandArguments }}
 {{ toYaml .Values.additionalCommandArguments | indent 12 }}
             {{- end }}

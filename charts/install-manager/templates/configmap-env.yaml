@@ -64,8 +64,6 @@ data:
   EXECUTE_TASKS_PROVIDER_TYPE: {{ .Values.executeTasksProviderType | quote  }}
   EXECUTE_TASKS_ROOT_DIR: {{ .Values.executeTasksRootDir | quote  }}
 
-  INCLUDE_RESOURCE_FILTERS: {{ .Values.includeResourceFilters | quote  }}
-
   {{- if .Values.s3Endpoint }}
   S3_ENDPOINT: {{ .Values.s3Endpoint | quote  }}
   {{- end }}
