@@ -148,6 +148,15 @@ entries:
   install-manager:
   - apiVersion: v2
     appVersion: 0.34.4
+    created: "2026-10-28T22:41:04.805532545Z"
+    description: The Modern Data Cloud Install Manager Chart
+    digest: 56e81acf5b6bad036c2da4d17fc01ba5e53f99d7ffce834ca8899a30b40dd16f
+    name: install-manager
+    urls:
+    - https://github.com/tmdc-io/dataos-helm/releases/download/install-manager-1.0.2/install-manager-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
+    appVersion: 0.34.4
     created: "2026-10-28T22:35:20.081101927Z"
     description: The Modern Data Cloud Install Manager Chart
     digest: 49b6d2401945bd2b9198aac4691123e51f88cea0d12c9e7911411a65793fb2df
@@ -164,4 +173,4 @@ entries:
     urls:
     - https://github.com/tmdc-io/dataos-helm/releases/download/install-manager-1.0.0/install-manager-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-28T22:35:20.081173773Z"
+generated: "2026-10-28T22:41:04.805611331Z"
