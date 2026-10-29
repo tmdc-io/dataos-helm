@@ -46,10 +46,10 @@ data:
   MDC_URL: {{ .Values.mdcUrl | quote  }}
   HEPH_URL: {{ .Values.hephUrl | quote  }}
   HEPH_INSECURE: {{ .Values.hephInsecure | quote  }}
-  ENABLE_PRIME_SYNC_UP: {{ .Values.enablePrimeSyncUp | quote  }}
-  ENABLE_PRIME_SYNC_EXECUTE: {{ .Values.enablePrimeSyncExecute | quote  }}
-  PRIME_SYNC_INTERVAL_UP: {{ .Values.primeSyncIntervalUp | quote  }}
-  PRIME_SYNC_INTERVAL_EXECUTE: {{ .Values.primeSyncIntervalExecute | quote  }}
+  ENABLE_PRIME_SYNC_UP: {{ .Values.enableSyncUp | quote  }}
+  ENABLE_PRIME_SYNC_EXECUTE: {{ .Values.enableSyncExecute | quote  }}
+  PRIME_SYNC_INTERVAL_UP: {{ .Values.syncIntervalUp | quote  }}
+  PRIME_SYNC_INTERVAL_EXECUTE: {{ .Values.syncIntervalExecute | quote  }}
 
   GIT_SUB_DIR: {{ .Values.gitSubDir | quote  }}
   GIT_T_MINUS_1_DIR: {{ .Values.gitTMinus1Dir | quote  }}

@@ -4,11 +4,11 @@ instanceName:
 instanceId: 
 # The envType is the short code for the Install Instance Target like "iks" | "dks"
 envType: 
-# The Prime APIKEY
-primeApiKey: 
-# The Prime Account ID
-primeAccountId: 
-# The modern data prime url
+# The modern data cloud APIKEY
+mdcApiKey: 
+# The modern data cloud Account ID
+mdcAccountId: 
+# The modern data cloud url
 mdcUrl: 
 # The forge url
 hephUrl: 
@@ -465,10 +465,10 @@ helmDataHome: /opt/dataos/home/helm/.local
 
 # Skip TLS verification for heph client (needed for cluster-local private CA certs)
 hephInsecure: true
-enablePrimeSyncUp: true
-enablePrimeSyncExecute: true
-primeSyncIntervalUp: 5m
-primeSyncIntervalExecute: 30s
+enableSyncUp: true
+enableSyncExecute: true
+syncIntervalUp: 5m
+syncIntervalExecute: 30s
 
 gitOpsProviderType: 
 gitOpsRootDir: gitopsroot
