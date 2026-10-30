@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/part-of: '{{ .Values.application }}'
 spec:
   hard:
-    pods: {{ .Values.resourceQuota.podsQuota }}
+    pods: {{ .Values.resourceQuota.podsQuota | quote }}
   scopeSelector:
     matchExpressions:
     - operator: In

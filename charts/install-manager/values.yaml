@@ -497,7 +497,7 @@ s3ForcePathStyle: false
 
 # Defines the resource quota for the dataos-manager namespace
 resourceQuota:
-  podsQuota: 5
+  podsQuota: 2
   priorityClasses:
   - system-cluster-critical
 
